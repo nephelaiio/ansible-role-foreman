@@ -16,7 +16,7 @@ install:
   - ansible --version
 
 script:
-  - rm /tmp/resolv.conf
+  - rm -rf /tmp/resolv.conf
   - echo nameserver 8.8.8.8 >> /tmp/resolv.conf
   - echo search nephelai.io >> /tmp/resolv.conf
   - docker run --rm -it -v /tmp:/tmp -v "$(pwd)":/tmp/$(basename "${PWD}"):ro -v /var/run/docker.sock:/var/run/docker.sock -w /tmp/$(basename "${PWD}") quay.io/ansible/molecule:3.0.2 molecule test
