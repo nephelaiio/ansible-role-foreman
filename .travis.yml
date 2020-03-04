@@ -1,0 +1,25 @@
+---
+language: python
+python: "2.7"
+
+# Use the new container infrastructure
+sudo: false
+
+# Install ansible
+addons:
+  apt:
+    packages:
+    - python-pip
+
+install:
+  - pip install -r https://raw.githubusercontent.com/nephelaiio/ansible-role-requirements/molecule3/requirements.txt
+  - ansible --version
+
+script:
+  - rm /tmp/resolv.conf
+  - echo nameserver 8.8.8.8 >> /tmp/resolv.conf
+  - echo search nephelai.io >> /tmp/resolv.conf
+  - docker run --rm -it -v /tmp:/tmp -v "$(pwd)":/tmp/$(basename "${PWD}"):ro -v /var/run/docker.sock:/var/run/docker.sock -w /tmp/$(basename "${PWD}") quay.io/ansible/molecule:3.0.2 molecule test
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
