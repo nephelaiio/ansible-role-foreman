@@ -1,0 +1,34 @@
+---
+foreman_installer_package: foreman-installer
+foreman_installer_command: foreman-installer -v
+foreman_installer_options:
+  - "--enable-foreman"
+  - "--enable-puppet"
+  - "--enable-foreman-cli"
+  - "--enable-foreman-cli-ansible"
+  - "--enable-foreman-compute-libvirt"
+  - "--enable-foreman-compute-ovirt"
+  - "--enable-foreman-plugin-templates"
+  - "--enable-foreman-plugin-openscap"
+  - "--enable-foreman-plugin-discovery"
+  - "--foreman-foreman-url {{ foreman_url }}"
+  - "--foreman-configure-epel-repo true"
+  - "--foreman-configure-scl-repo true"
+  - "--foreman-db-adapter postgresql"
+  - "--foreman-db-username {{ foreman_db_user | default('foreman') }}"
+  - "--foreman-db-password {{ foreman_db_pass }}"
+  - "--foreman-db-database {{ foreman_db_name | default('foreman') }}"
+  - "--foreman-db-host localhost"
+  - "--foreman-db-manage true"
+  - "--foreman-db-manage-rake true"
+  - "--foreman-initial-admin-username {{ foreman_admin_user }}"
+  - "--foreman-initial-admin-password {{ foreman_admin_pass }}"
+foreman_installer_extra_options: []
+foreman_hosts_manage: yes
+foreman_api_allpages: 9999999999
+foreman_url: "http://{{ ansible_hostname }}"
+foreman_admin_user: admin
+foreman_admin_pass: admin
+foreman_db_user: foreman
+foreman_db_pass: foreman
+foreman_db_name: foreman

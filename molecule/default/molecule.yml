@@ -1,0 +1,25 @@
+---
+dependency:
+  name: galaxy
+lint: |
+  yamllint .
+  ansible-lint .
+driver:
+  name: docker
+platforms:
+  - name: centos7
+    hostname: centos7.nephelai.io
+    image: centos:7
+    privileged: yes
+    command: /usr/sbin/init
+    volumes:
+      - /tmp/resolv.conf:/etc/resolv.conf
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+provisioner:
+  name: ansible
+  inventory:
+    group_vars:
+      all:
+        foreman_hosts_manage: no
+verifier:
+  name: ansible

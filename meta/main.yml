@@ -1,0 +1,27 @@
+galaxy_info:
+  role_name: foreman
+  author: Ted Cook
+  description: An Ansible role to install and configure Foreman
+  license: GPL-3.0-or-later
+
+  min_ansible_version: 2.9
+
+  platforms:
+  - name: EL
+    versions:
+    - 7
+  - name: Ubuntu
+    versions:
+    - bionic
+  - name: Debian
+    versions:
+    - buster
+
+  galaxy_tags:
+    - foreman
+
+dependencies:
+  - role: nephelaiio.foreman_repo
+    version: 0.0.1
+  - role: nephelaiio.pip
+    version: 4.0.4
