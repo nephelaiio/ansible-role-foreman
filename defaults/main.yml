@@ -35,5 +35,7 @@ foreman_url: "http://{{ ansible_hostname }}"
 foreman_admin_user: admin
 foreman_db_user: foreman
 foreman_db_name: foreman
+foreman_http_port: 80
+foreman_https_port: 443
 #foreman_admin_pass: admin
 #foreman_db_pass: foreman
