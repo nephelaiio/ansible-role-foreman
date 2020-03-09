@@ -7,14 +7,19 @@ An [ansible role](https://galaxy.ansible.com/nephelaiio/foreman_repo) to install
 
 ## Role Variables
 
-| required | variable             | description               | default                              |
-| ---      | ---                  | ---                       | ---                                  |
-| no       | foreman_docker_image | image to deploy           | quay.io/foreman/foreman              |
-| no       | foreman_port         | port to bind to container | 8080                                 |
-| no       | foreman_db_host      | db host address           | "{{ ansible_default_ipv4.address }}" |
-| no       | foreman_db_name      | database name             | foreman                              |
-| no       | foreman_db_user      | database user             | foreman                              |
-| *yes*    | foreman_db_pass      | database password         | N/A                                  |
+| required | variable                        | description                                          | default                              |
+| ---      | ---                             | ---                                                  | ---                                  |
+| no       | foreman_hosts_manage            | manage /etc/hosts entries                            | yes                                  |
+| no       | foreman_http_port               | tcp port for http requests                           | 80                                   |
+| no       | foreman_https_port              | tcp port for https requests                          | 443                                  |
+| no       | foreman_admin_user              | foreman admin username                               | admin                                |
+| *yes*    | foreman_admin_pass              | foreman admin password                               | admin                                |
+| no       | foreman_db_host                 | db host address                                      | "{{ ansible_default_ipv4.address }}" |
+| no       | foreman_db_name                 | database name                                        | foreman                              |
+| no       | foreman_db_user                 | database user                                        | foreman                              |
+| *yes*    | foreman_db_pass                 | database password                                    | foreman                              |
+| no       | foreman_installer_extra_options | append command line arguments to foreman-installer   | []                                   |
+| no       | foreman_installer_options       | override command line arguments to foreman-installer | see [defaults](/defaults/main.yml)   |
 
 ## Example Playbook
 

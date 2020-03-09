@@ -21,5 +21,7 @@ provisioner:
     group_vars:
       all:
         foreman_hosts_manage: no
+        foreman_admin_pass: admin
+        foreman_db_pass: foreman
 verifier:
   name: ansible

@@ -11,6 +11,11 @@ foreman_installer_options:
   - "--enable-foreman-plugin-templates"
   - "--enable-foreman-plugin-openscap"
   - "--enable-foreman-plugin-discovery"
+  - "--enable-foreman-plugin-expire-hosts"
+  - "--foreman-unattended"
+  - "--foreman-server-name {{foreman_url |  }}"
+  - "--foreman-server-port {{foreman_http_port }}"
+  - "--foreman-server-ssl-port {{foreman_https_port }}"
   - "--foreman-foreman-url {{ foreman_url }}"
   - "--foreman-configure-epel-repo true"
   - "--foreman-configure-scl-repo true"
@@ -28,7 +33,7 @@ foreman_hosts_manage: yes
 foreman_api_allpages: 9999999999
 foreman_url: "http://{{ ansible_hostname }}"
 foreman_admin_user: admin
-foreman_admin_pass: admin
 foreman_db_user: foreman
-foreman_db_pass: foreman
 foreman_db_name: foreman
+#foreman_admin_pass: admin
+#foreman_db_pass: foreman
