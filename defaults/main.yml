@@ -13,7 +13,7 @@ foreman_installer_options:
   - "--enable-foreman-plugin-discovery"
   - "--enable-foreman-plugin-expire-hosts"
   - "--foreman-unattended"
-  - "--foreman-server-name {{foreman_url |  }}"
+  - "--foreman-server-name {{foreman_url | urlsplit('hostname')  }}"
   - "--foreman-server-port {{foreman_http_port }}"
   - "--foreman-server-ssl-port {{foreman_https_port }}"
   - "--foreman-foreman-url {{ foreman_url }}"
