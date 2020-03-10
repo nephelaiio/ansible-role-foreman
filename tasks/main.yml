@@ -53,7 +53,7 @@
 
     - name: query foreman users
       uri:
-        url: "{{ foreman_url | urlsplit('scheme') }}/api/users"
+        url: "{{ foreman_url }}/api/users"
         method: GET
         body_format: json
         body:
