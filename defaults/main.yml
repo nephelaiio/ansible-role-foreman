@@ -31,7 +31,7 @@ foreman_installer_options:
 foreman_installer_extra_options: []
 foreman_hosts_manage: yes
 foreman_api_allpages: 9999999999
-foreman_url: "http://{{ ansible_hostname }}"
+foreman_url: "https://{{ ansible_hostname }}"
 foreman_admin_user: admin
 foreman_db_user: foreman
 foreman_db_name: foreman
