@@ -27,7 +27,7 @@
 
 - name: query foreman users
   uri:
-    url: "{{ foreman_url | urlsplit('scheme') }}://{{ ansible_fqdn }}/api/users"
+    url: "{{ foreman_url | urlsplit('scheme') }}/api/users"
     method: GET
     body_format: json
     body:
@@ -55,7 +55,7 @@
 
     - name: query foreman users
       uri:
-        url: "{{ foreman_url | urlsplit('scheme') }}://{{ ansible_fqdn }}/api/users"
+        url: "{{ foreman_url | urlsplit('scheme') }}/api/users"
         method: GET
         body_format: json
         body:
@@ -76,7 +76,7 @@
 
     - name: set admin foreman password
       uri:
-        url: "{{ foreman_url | urlsplit('scheme') }}://{{ ansible_fqdn }}/api/users/{{ foreman_admin.id }}"
+        url: "{{ foreman_url }}/api/users/{{ foreman_admin.id }}"
         method: PUT
         body_format: json
         headers:
