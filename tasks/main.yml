@@ -32,8 +32,6 @@
     body_format: json
     body:
       per_page: "{{ foreman_api_allpages }}"
-    headers:
-      Host: "{{ foreman_url | urlsplit('hostname') }}"
     force_basic_auth: yes
     user: "{{ foreman_admin_user }}"
     password: "{{ foreman_admin_pass }}"
@@ -60,8 +58,6 @@
         body_format: json
         body:
           per_page: "{{ foreman_api_allpages }}"
-        headers:
-          Host: "{{ foreman_url | urlsplit('hostname') }}"
         force_basic_auth: yes
         user: "{{ reset_admin_user }}"
         password: "{{ reset_admin_pass }}"
@@ -79,8 +75,6 @@
         url: "{{ foreman_url }}/api/users/{{ foreman_admin.id }}"
         method: PUT
         body_format: json
-        headers:
-          Host: "{{ foreman_url | urlsplit('hostname') }}"
         body:
           user:
             current_password: "{{ reset_admin_pass }}"
