@@ -15,7 +15,7 @@ foreman_installer_options:
   - "--foreman-unattended true"
   - "--foreman-servername {{foreman_url | urlsplit('hostname') }}"
   - "--foreman-server-port {{ foreman_http_port }}"
-  - "--foreman-server-ssl-port {{foreman_https_port }}"
+  - "--foreman-server-ssl-port {{ foreman_https_port }}"
   - "--foreman-foreman-url {{ foreman_url }}"
   - "--foreman-configure-epel-repo true"
   - "--foreman-configure-scl-repo true"
