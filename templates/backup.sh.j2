@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+/usr/bin/pg_basebackup -D {{ foreman_backup_dir }}/$(date +%Y%m%d-%H%M%S) -Ft -X stream -z
+
+find {{ foreman_backup_dir }} -mtime +{{ foreman_backup_retention_days }} -delete

@@ -7,15 +7,14 @@
   import_role:
     name: geerlingguy.postgresql
   vars:
-    postgresql_release: 10
     postgresql_packages:
-      - "postgresql{{ postgresql_release }}"
-      - "postgresql{{ postgresql_release }}-server"
-      - "postgresql{{ postgresql_release }}-contrib"
-      - "postgresql{{ postgresql_release }}-libs"
-    postgresql_bin_path: "/usr/pgsql-{{ postgresql_release }}/bin"
-    postgresql_daemon: "postgresql-{{ postgresql_release }}"
-    postgresql_data_dir: "/var/lib/pgsql/{{ postgresql_release }}/data"
+      - "postgresql{{ foreman_postgresql_release }}"
+      - "postgresql{{ foreman_postgresql_release }}-server"
+      - "postgresql{{ foreman_postgresql_release }}-contrib"
+      - "postgresql{{ foreman_postgresql_release }}-libs"
+    postgresql_bin_path: "/usr/pgsql-{{ foreman_postgresql_release }}/bin"
+    postgresql_daemon: "postgresql-{{ foreman_postgresql_release }}"
+    postgresql_data_dir: "{{ foreman_postgresql_data_dir }}"
     postgresql_config_path: "/var/lib/pgsql/data"
     postgresql_users:
       - name: "{{ foreman_db_user }}"
@@ -158,3 +157,15 @@
     group: puppet
     mode: 0664
   changed_when: false
+
+- name: create backup file
+  template:
+    src: backup.sh.j2
+    dest: "{{ foreman_backup_bin }}"
+    mode: 0755
+
+- name: create backup cronjob
+  cron:
+    name: FOREMAN_BACKUP
+    job: "sudo -u postgres {{ foreman_backup_bin }}"
+    special_time: hourly
