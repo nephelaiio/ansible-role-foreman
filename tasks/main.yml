@@ -15,7 +15,7 @@
     postgresql_bin_path: "/usr/pgsql-{{ foreman_postgresql_release }}/bin"
     postgresql_daemon: "postgresql-{{ foreman_postgresql_release }}"
     postgresql_data_dir: "{{ foreman_postgresql_data_dir }}"
-    postgresql_config_path: "/var/lib/pgsql/data"
+    postgresql_config_path: "{{ foreman_postgresql_config_path }}"
     postgresql_users:
       - name: "{{ foreman_db_user }}"
         password: "{{ foreman_db_pass }}"
