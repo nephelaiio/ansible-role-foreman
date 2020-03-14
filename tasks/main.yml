@@ -158,7 +158,7 @@
     mode: 0664
   changed_when: false
 
-- name: create backup file
+- name: create backup binary file
   template:
     src: backup.sh.j2
     dest: "{{ foreman_backup_bin }}"
@@ -169,3 +169,11 @@
     name: FOREMAN_BACKUP
     job: "sudo -u postgres {{ foreman_backup_bin }}"
     special_time: hourly
+
+- name: create motd banners
+  lineinfile:
+    path: /etc/motd
+    line: "{{ item }}"
+    create: yes
+  loop:
+    - run sudo {{ foreman_backup_bin }} to perform an unscheduled foreman backup
