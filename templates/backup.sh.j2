@@ -1,5 +1,17 @@
 #!/usr/bin/env bash
 
-/usr/bin/pg_basebackup -D {{ foreman_backup_dir }}/$(date +%Y%m%d-%H%M%S) -Ft -X stream -z
+TMPDIR=$(mktemp -d)
+BKPFILE="{{ ansible_fqdn }}.psql.$(date +%Y%m%d-%H%M%S)"
+BKPREGEX=$(echo ${BKPFILE} | cut -d '.' -f 2)
 
-find {{ foreman_backup_dir }} -mtime +{{ foreman_backup_retention_days }} -delete
+chown postgres ${TMPDIR}
+
+sudo -u postgres /usr/bin/pg_basebackup -D ${TMPDIR}/${BKPFILE} -Ft -X stream -z
+
+mv ${TMPDIR}/${BKPFILE} {{ foreman_backup_dir }}/
+
+find {{ foreman_backup_dir }} -name ${BKPREGEX} -mtime +{{ foreman_backup_retention_days }} -delete 1>&2 > /dev/null
+
+rm -rf postgres ${TMPDIR}
+
+echo {{ foreman_backup_dir }}/{{ ansible_fqdn }}.psql.$(date +%Y%m%d-%H%M%S)

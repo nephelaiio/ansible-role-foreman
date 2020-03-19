@@ -29,6 +29,10 @@
         user: postgres
         auth_method: peer
       - type: local
+        database: replication
+        user: postgres
+        auth_method: peer
+      - type: local
         database: all
         user: all
         auth_method: peer
@@ -177,3 +181,4 @@
     create: yes
   loop:
     - run sudo {{ foreman_backup_bin }} to perform an unscheduled foreman backup
+    - run sudo {{ foreman_restore_bin }} to restore a foreman to the latest available backup

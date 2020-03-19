@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+restore_backup=$1
+new_backup=$({{ foreman_backup_bin }})
+
+systemctl stop postgresql
+systemctl start postgresql
