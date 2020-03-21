@@ -16,10 +16,7 @@ install:
   - ansible --version
 
 script:
-  - rm -rf /tmp/resolv.conf
-  - echo nameserver 8.8.8.8 >> /tmp/resolv.conf
-  - echo search nephelai.io >> /tmp/resolv.conf
-  - travis_wait 30 molecule test
+  - travis_wait make test
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
