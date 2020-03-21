@@ -183,8 +183,11 @@
 - name: create motd banners
   lineinfile:
     path: /etc/motd
-    line: "{{ item }}"
+    line: "{{ item.line }}"
+    regexp: "{{ item.regexp }}
     create: yes
   loop:
-    - run sudo {{ foreman_backup_bin }} to perform an unscheduled foreman backup
-    - run sudo {{ foreman_restore_bin }} to restore a foreman to the latest available backup
+    - regexp: ".*{{ foreman_backup_bin }}.*"
+      line: run sudo {{ foreman_backup_bin }} to perform an unscheduled foreman backup
+    - regexp: ".*{{ foreman_restore_bin }}.*"
+      line: run sudo {{ foreman_restore_bin }} to restore a foreman to the latest available backup
