@@ -2,13 +2,14 @@
 - name: Verify
   hosts: all
   tasks:
-  - name: call foreman login page
-    uri:
-      url: https://localhost/users/login
-      validate_certs: no
-    register: foreman_query
 
-  - name: verify foreman login call
-    assert:
-      that:
-        - foreman_query.status == 200
+    - name: call foreman login page
+      uri:
+        url: https://localhost/users/login
+        validate_certs: no
+      register: foreman_query
+
+    - name: verify foreman login call
+      assert:
+        that:
+          - foreman_query.status == 200

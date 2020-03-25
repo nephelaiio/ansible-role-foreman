@@ -1,0 +1,51 @@
+---
+- name: Backup and restore
+  hosts: all
+  tasks:
+
+    - name: fix docker hosts file conflicts
+      command: sed -e '/^::1/d' /etc/hosts
+      args:
+        warn: no
+
+    - name: take foreman backup
+      command: "/usr/local/bin/foreman_backup"
+      register: backup_cmd
+
+    - name: disable connections to foreman database
+      command: "psql -c \"update pg_database set datallowconn = false where datname = 'foreman'\""
+      become: yes
+      become_user: postgres
+
+    - name: disconnect users from foreman database
+      command: "psql -c \"select pg_terminate_backend(pid) from pg_stat_activity where datname='foreman'\""
+      become: yes
+      become_user: postgres
+
+    - name: remove foreman database
+      command: "psql -c 'DROP DATABASE foreman'"
+      become: yes
+      become_user: postgres
+      failed_when: false
+
+    - name: verify foreman database removal
+      command: "psql -t -c \"select json_agg(datname) from pg_database\""
+      become: yes
+      become_user: postgres
+      register: foreman_remove_query
+      failed_when: "'foreman' in (foreman_remove_query.stdout | from_json)"
+
+    - name: restore foreman backup
+      command: "/usr/local/bin/foreman_restore {{ backup_cmd.stdout }}"
+
+    - name: ensure postgresql is started
+      service:
+        name: "postgresql-10"
+        state: started
+
+    - name: verify foreman database restore
+      command: "psql -t -c \"select json_agg(datname) from pg_database\""
+      become: yes
+      become_user: postgres
+      register: foreman_verify_query
+      failed_when: "'foreman' not in (foreman_verify_query.stdout | from_json)" 

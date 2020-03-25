@@ -167,27 +167,38 @@
     src: backup.sh.j2
     dest: "{{ foreman_backup_bin }}"
     mode: 0755
+  tags:
+    - backup
 
 - name: create backup cronjob
   cron:
     name: FOREMAN_BACKUP
     job: "sudo -u postgres {{ foreman_backup_bin }}"
     special_time: hourly
+  tags:
+    - backup
 
 - name: create restore binary file
   template:
     src: restore.sh.j2
     dest: "{{ foreman_restore_bin }}"
     mode: 0755
+  vars:
+    postgresql_data_dir: "{{ foreman_postgresql_data_dir }}"
+  tags:
+    - restore
 
 - name: create motd banners
   lineinfile:
     path: /etc/motd
     line: "{{ item.line }}"
-    regexp: "{{ item.regexp }}
+    regexp: "{{ item.regexp }}"
     create: yes
   loop:
     - regexp: ".*{{ foreman_backup_bin }}.*"
       line: run sudo {{ foreman_backup_bin }} to perform an unscheduled foreman backup
     - regexp: ".*{{ foreman_restore_bin }}.*"
       line: run sudo {{ foreman_restore_bin }} to restore a foreman to the latest available backup
+  tags:
+    - backup
+    - restore
