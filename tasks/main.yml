@@ -173,7 +173,7 @@
 - name: create backup cronjob
   cron:
     name: FOREMAN_BACKUP
-    job: "sudo -u postgres {{ foreman_backup_bin }}"
+    job: "{{ foreman_backup_bin }}"
     special_time: hourly
   tags:
     - backup
