@@ -37,7 +37,7 @@ foreman_db_user: foreman
 foreman_db_name: foreman
 foreman_http_port: 80
 foreman_https_port: 443
-foreman_repo: "https://download.postgresql.org/pub/repos/yum/reporpms/EL-{{ ansible_distribution_major_version }}-{{ ansible_architecture }}/pgdg-redhat-repo-latest.noarch.rpm"
+foreman_postgresql_repo: "https://download.postgresql.org/pub/repos/yum/reporpms/EL-{{ ansible_distribution_major_version }}-{{ ansible_architecture }}/pgdg-redhat-repo-latest.noarch.rpm"
 foreman_postgresql_release: 10
 foreman_backup_retention_days: 3
 foreman_backup_dir: "/var/lib/pgsql/{{ foreman_postgresql_release }}/backup"

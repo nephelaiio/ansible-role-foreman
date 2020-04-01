@@ -1,7 +1,7 @@
 ---
 - name: install postgresql repository
   package:
-    name: "{{ foreman_repo }}"
+    name: "{{ foreman_postgresql_repo }}"
 
 - name: install postgresql
   import_role:
