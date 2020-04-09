@@ -44,6 +44,7 @@ foreman_backup_dir: "/var/lib/pgsql/{{ foreman_postgresql_release }}/backup"
 foreman_backup_bin: "/usr/local/bin/foreman_backup"
 foreman_restore_bin: "/usr/local/bin/foreman_restore"
 foreman_postgresql_repo_install: yes
+foreman_postgresql_repo_state: present
 foreman_postgresql_data_dir: "/var/lib/pgsql/{{ foreman_postgresql_release }}/data"
 foreman_postgresql_config_path: "/var/lib/pgsql/{{ foreman_postgresql_release }}/data"
 
