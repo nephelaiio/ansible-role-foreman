@@ -2,6 +2,7 @@
 - name: install postgresql repository
   package:
     name: "{{ foreman_postgresql_repo }}"
+  when: foreman_postgresql_repo_install
 
 - name: install postgresql
   import_role:
