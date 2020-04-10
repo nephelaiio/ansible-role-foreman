@@ -71,7 +71,7 @@
 - name: install foreman installer
   package:
     name: "{{ foreman_installer_package }}"
-    state: present
+    state: "{{ foreman_installer_state }}"
   tags:
     - install
 

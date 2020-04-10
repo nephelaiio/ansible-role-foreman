@@ -1,5 +1,6 @@
 ---
 foreman_installer_package: foreman-installer
+foreman_installer_state: present
 foreman_installer_command: foreman-installer -v
 foreman_installer_options:
   - "--enable-foreman"
