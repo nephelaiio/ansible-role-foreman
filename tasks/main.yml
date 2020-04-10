@@ -55,10 +55,14 @@
         address: '::1/128'
         auth_method: md5
     postgresql_global_config_options:
+      - option: listen_addresses
+        value: localhost
       - option: wal_level
         value: replica
       - option: max_wal_senders
         value: 5
+      - option: restore_command
+        value: 'cp /mnt/server/archivedir/%f %p'
 
 - name: remove postgresql repository
   package:
