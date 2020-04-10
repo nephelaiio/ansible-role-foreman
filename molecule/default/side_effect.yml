@@ -40,7 +40,7 @@
 
     - name: ensure postgresql is started
       service:
-        name: "postgresql-10"
+        name: "postgresql-12"
         state: started
 
     - name: verify foreman database restore

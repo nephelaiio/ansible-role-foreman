@@ -2,8 +2,9 @@
 - name: install postgresql repository
   package:
     name: "{{ foreman_postgresql_repo }}"
-    state: "{{ foreman_postgresql_repo_state }}"
-  when: foreman_postgresql_repo_install
+    state: present
+  when: foreman_postgresql_repo_manage
+  changed_when: false
 
 - name: install postgresql
   import_role:
@@ -58,6 +59,13 @@
         value: replica
       - option: max_wal_senders
         value: 5
+
+- name: remove postgresql repository
+  package:
+    name: pgdg-redhat-repo-*
+    state: absent
+  when: foreman_postgresql_repo_manage
+  changed_when: false
 
 - name: configure hosts file
   lineinfile:
