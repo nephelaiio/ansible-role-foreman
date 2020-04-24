@@ -62,7 +62,7 @@ BKPREGEX=$(echo ${BKPFILE} | cut -d '.' -f 2)
 BKPRETENTION={{ foreman_backup_retention_days }}
 
 debug -n "creating temporary backup directory ... "
-TMPDIR=$(mktemp -d)
+TMPDIR=$(mktemp -d -p ${BKPDIR})
 chown postgres ${TMPDIR}
 debug "OK"
 
