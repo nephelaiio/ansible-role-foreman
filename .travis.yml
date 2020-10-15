@@ -12,7 +12,7 @@ addons:
     - python-pip
 
 install:
-  - pip install -r https://raw.githubusercontent.com/nephelaiio/ansible-role-requirements/molecule3/requirements.txt
+  - pip install -r https://raw.githubusercontent.com/nephelaiio/ansible-role-requirements/master/requirements.txt
   - ansible --version
 
 script:
